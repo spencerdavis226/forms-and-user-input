@@ -55,7 +55,7 @@ const UserForm = () => {
         id="password"
         type="password"
         name="password"
-        placeholder="password"
+        placeholder="Password"
         value={formData.password}
         onChange={handleChange}
       />
