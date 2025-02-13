@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import uuid from 'uuid/v4'; // Used to create unique IDs for keys. Use "npm install uuid"
+import { v4 as uuid } from 'uuid'; // Used to create unique IDs for keys. Use "npm install uuid"
 import Item from './Item';
 import NewItemForm from './NewItemForm';
 
@@ -17,8 +17,8 @@ const ShoppingList = () => {
     },
   ];
   const [items, setItems] = useState(INITIAL_STATE);
-  const addItem = (name, qty) => {
-    setItems((items) => [...items, { id: uuid(), name, qty }]);
+  const addItem = (newItem) => {
+    setItems((items) => [...items, { ...newItem, id: uuid }]);
   };
 
   return (

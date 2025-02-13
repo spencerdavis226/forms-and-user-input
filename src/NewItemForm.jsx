@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const NewItemForm = ({ addItem }) => {
   const INITIAL_STATE = {
@@ -9,6 +10,7 @@ const NewItemForm = ({ addItem }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log('Event Target:', e);
     setFormData((formData) => ({
       ...formData,
       [name]: value,
@@ -17,7 +19,7 @@ const NewItemForm = ({ addItem }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addItem(formData.name, formData.qty);
+    addItem({ ...formData });
     setFormData(INITIAL_STATE);
   };
 
@@ -33,18 +35,24 @@ const NewItemForm = ({ addItem }) => {
         onChange={handleChange}
       />
 
-      <label htmlFor="qty">Quantity</label>
+      <label htmlFor="qty">Quantity: {formData.qty}</label>
       <input
         id="qty"
-        type="text"
+        type="range"
+        min="1"
+        max="10"
         name="qty"
-        placeholder="Quantity"
         value={formData.qty}
         onChange={handleChange}
       />
+
       <button>Add Item</button>
     </form>
   );
+};
+
+NewItemForm.propTypes = {
+  addItem: PropTypes.func.isRequired,
 };
 
 export default NewItemForm;
